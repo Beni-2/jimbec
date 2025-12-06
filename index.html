@@ -956,16 +956,26 @@
         }
         
         /* Custom styles for the event photo placeholders */
-        /* NOTE: The original event-placeholder-inner styles are removed/simplified to mimic product card consistency */
         .event-placeholder-base {
+            /* Keep original hover scale for the entire card for now */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             display: flex; 
             align-items: center; 
             justify-content: center; 
         }
         .event-placeholder-base:hover {
-            transform: scale(1.05); /* Hover animation */
+            /* Parent transform is applied on the element itself, so hover needs to be removed from the child and left on the parent */
+            /* Removed redundant transform: scale(1.05) here, as it's applied via JS/HTML classes now */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* NEW: Hover pulse/beat animation for all product image placeholders */
+        .hover-pulse-beat {
+            transition: transform 0.3s ease-in-out;
+            will-change: transform;
+        }
+        .hover-pulse-beat:hover {
+            transform: scale(1.05); /* Pronounced scale for a "beat" effect */
         }
         
         /* UPDATED: Mobile Menu with increased subtle transparency (bg-white with 85% opacity) */
@@ -1073,12 +1083,12 @@
                         Discover the all-time favorites that bring extra flavor to every meal! These top picks are loved by families and foodies alike — perfect for everyday cooking, party platters, or quick bites.
                     </p>
 
-                    <!-- Product Grid (4 featured products) - Animated -->
+                    <!-- Product Grid (4 featured products) - Hover Pulse added back -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
                         <!-- Product Card 1: Chicken Ham (Slide Bottom) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:shadow-lg animate-on-scroll slide-in-bottom">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Cooked Ham</h3>
@@ -1088,8 +1098,8 @@
                         </div>
 
                         <!-- Product Card 2: Chicken Tapa (Slide Bottom) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:shadow-lg animate-on-scroll slide-in-bottom">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tapa</h3>
@@ -1099,8 +1109,8 @@
                         </div>
 
                         <!-- Product Card 3: Chicken Tocino (Slide Bottom) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:shadow-lg animate-on-scroll slide-in-bottom">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tocino</h3>
@@ -1110,8 +1120,8 @@
                         </div>
 
                         <!-- Product Card 4: Chicken Skinless Longganisa (Slide Bottom) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:shadow-lg animate-on-scroll slide-in-bottom">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Skinless-Longganisa</h3>
@@ -1141,9 +1151,9 @@
                     <!-- Product Grid (3 rows x 3 columns = 9 products per page visualization) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
                         
-                        <!-- --- Page 1 (Products 1-9) - Animated --- -->
+                        <!-- --- Page 1 (Products 1-9) - Hover Pulse added back --- -->
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 01: Chicken Cooked Ham</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Cooked Ham (Sliced)</h3>
@@ -1151,7 +1161,7 @@
                             <button onclick="showProductDetail('prod-01')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 02: Chicken Tapa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tapa (Marinated)</h3>
@@ -1159,7 +1169,7 @@
                             <button onclick="showProductDetail('prod-02')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 03: Chicken Tocino</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tocino (Sweet Glaze)</h3>
@@ -1167,7 +1177,7 @@
                             <button onclick="showProductDetail('prod-03')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 04: Chicken Skinless Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Skinless Longganisa</h3>
@@ -1175,7 +1185,7 @@
                             <button onclick="showProductDetail('prod-04')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 05: Beef Corned Loaf</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Corned Loaf</h3>
@@ -1183,7 +1193,7 @@
                             <button onclick="showProductDetail('prod-05')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 06: Spicy Chicken Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Spicy Chicken Longganisa</h3>
@@ -1191,7 +1201,7 @@
                             <button onclick="showProductDetail('prod-06')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 07: Chicken Skinless Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Skinless Longganisa</h3>
@@ -1199,7 +1209,7 @@
                             <button onclick="showProductDetail('prod-07')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 08: Chicken Vienna Sausage</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Vienna Sausage</h3>
@@ -1207,7 +1217,7 @@
                             <button onclick="showProductDetail('prod-08')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 09: Beef Hotdog (Jumbo)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Hotdog (Jumbo)</h3>
@@ -1215,9 +1225,9 @@
                             <button onclick="showProductDetail('prod-09')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
-                        <!-- --- Page 2 (Products 10-18) - Animated --- -->
+                        <!-- --- Page 2 (Products 10-18) - Hidden by default --- -->
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 10: Chicken Ham Slices</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Ham Slices</h3>
@@ -1225,7 +1235,7 @@
                             <button onclick="showProductDetail('prod-10')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 11: Chicken Sisig Mix</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Sisig Mix (Frozen)</h3>
@@ -1233,7 +1243,7 @@
                             <button onclick="showProductDetail('prod-11')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 12: Filipino Style Chicken Meatloaf</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Filipino Style Chicken Meatloaf</h3>
@@ -1241,7 +1251,7 @@
                             <button onclick="showProductDetail('prod-12')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 13: Chicken Cubes (Frozen)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Cubes (Frozen)</h3>
@@ -1249,7 +1259,7 @@
                             <button onclick="showProductDetail('prod-13')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 14: Sweet Cured Chicken Bacon</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Sweet Cured Chicken Bacon</h3>
@@ -1257,7 +1267,7 @@
                             <button onclick="showProductDetail('prod-14')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 15: Garlic Chicken Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Garlic Chicken Longganisa</h3>
@@ -1265,7 +1275,7 @@
                             <button onclick="showProductDetail('prod-15')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 16: Beef Patties</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Patties (Frozen)</h3>
@@ -1273,7 +1283,7 @@
                             <button onclick="showProductDetail('prod-16')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 17: Chicken Chorizo de Cebu Style</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Chorizo de Cebu Style</h3>
@@ -1281,7 +1291,7 @@
                             <button onclick="showProductDetail('prod-17')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 18: Chicken Loaf (Canned)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Loaf (Canned)</h3>
@@ -1289,9 +1299,9 @@
                             <button onclick="showProductDetail('prod-18')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
-                        <!-- --- Page 3 (Products 19-27) - Animated --- -->
+                        <!-- --- Page 3 (Products 19-27) - Hidden by default --- -->
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 19: Chicken Nuggets</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Nuggets (Frozen)</h3>
@@ -1299,7 +1309,7 @@
                             <button onclick="showProductDetail('prod-19')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 20: Meat Balls (Frozen)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Meat Balls (Frozen)</h3>
@@ -1307,7 +1317,7 @@
                             <button onclick="showProductDetail('prod-20')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 21: Beef Tapa (Spicy)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Tapa (Spicy)</h3>
@@ -1315,7 +1325,7 @@
                             <button onclick="showProductDetail('prod-21')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 22: Breakfast Sausage Links</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Breakfast Sausage Links</h3>
@@ -1323,7 +1333,7 @@
                             <button onclick="showProductDetail('prod-22')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 23: Shredded Chicken (Canned)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Shredded Chicken (Canned)</h3>
@@ -1331,7 +1341,7 @@
                             <button onclick="showProductDetail('prod-23')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 24: Jumbo Ham Slices</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Jumbo Ham Slices</h3>
@@ -1339,7 +1349,7 @@
                             <button onclick="showProductDetail('prod-24')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 25: Chicken Hotdog (Regular)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Hotdog (Regular)</h3>
@@ -1347,7 +1357,7 @@
                             <button onclick="showProductDetail('prod-25')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 26: Sweet Chicken Tocino (Frozen)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Sweet Chicken Tocino (Frozen)</h3>
@@ -1355,7 +1365,7 @@
                             <button onclick="showProductDetail('prod-26')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center hover-pulse-beat">
                                 <span class="placeholder-text text-sm max-w-full break-words">Product 27: Pepperoni Slices</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Pepperoni Slices</h3>
@@ -1457,10 +1467,10 @@
                                     
                                     html += `
                                         <div onclick="openEventModal('${eventId}')" 
-                                             class="cursor-pointer transition duration-300 transform hover:scale-[1.03] animate-on-scroll slide-in-bottom">
+                                             class="cursor-pointer transition duration-300 hover:shadow-xl animate-on-scroll slide-in-bottom">
                                             
-                                            <!-- The content below mimics the product card image placeholder -->
-                                            <div class="w-full aspect-square bg-gray-200 rounded-xl shadow-lg hover:shadow-xl event-placeholder-base">
+                                            <!-- Hover Pulse added to the placeholder for events -->
+                                            <div class="w-full aspect-square bg-gray-200 rounded-xl shadow-lg event-placeholder-base hover-pulse-beat">
                                                 <span class="placeholder-text text-sm p-4 leading-tight max-w-full break-words">
                                                     ${i+1}. ${event.title.split(' ')[0]} Event
                                                     <span class="block text-xs text-gray-500 mt-1">${event.title}</span>
