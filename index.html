@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JIMBEC Food Products Corp.</title>
+    <title>JB Food Products Corp.</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -34,7 +34,7 @@
             'prod-03': {
                 id: 'prod-03', name: 'Chicken Tocino (Sweet Glaze)', category: 'Frozen Delicacy',
                 description: 'Marinated in a signature sweet and savory glaze, our Chicken Tocino caramelizes beautifully in the pan for a traditional Filipino breakfast experience.',
-                longDescription: 'JIMBEC\'s Chicken Tocino uses premium cuts marinated in a signature sweet glaze. When fried, it develops a perfect caramelized exterior and stays juicy inside. The authentic sweet-savory flavor is a breakfast favorite.',
+                longDescription: 'JB\'s Chicken Tocino uses premium cuts marinated in a signature sweet glaze. When fried, it develops a perfect caramelized exterior and stays juicy inside. The authentic sweet-savory flavor is a breakfast favorite.',
                 imagePlaceholder: 'Product 03: Tocino Packaging',
                 weightOptions: [
                     { weight: '500g' },
@@ -105,7 +105,7 @@
             'prod-10': { 
                 id: 'prod-10', name: 'Chicken Ham Slices (Value Pack)', category: 'Processed Meat', 
                 description: 'Delicate chicken ham slices, low in fat and perfect for sandwiches or appetizers.', 
-                longDescription: 'An economical pack of our classic chicken ham, ensuring great value without compromising JIMBEC\'s promise of quality. Low in fat and highly versatile.', 
+                longDescription: 'An economical pack of our classic chicken ham, ensuring great value without compromising JB\'s promise of quality. Low in fat and highly versatile.', 
                 imagePlaceholder: 'Product 10: Value Ham Pack',
                 weightOptions: [
                     { weight: '500g' },
@@ -284,6 +284,24 @@
                 ]
             },
         };
+        
+        // --- NEW EVENT DATA STRUCTURE ---
+        const eventData = {
+            'event-1': { title: 'New Product Launch', text: 'Highlighting the Q3 2025 frozen goods line.' },
+            'event-2': { title: 'Dealer Conference', text: 'Annual gathering with our top distributors.' },
+            'event-3': { title: 'Food Fair Manila', text: 'Showcasing our processed meats at the international food expo.' },
+            'event-4': { title: 'Team Building 2025', text: 'Internal team activity in Batangas.' },
+            'event-5': { title: 'Q1 Sales Rally', text: 'Celebrating success and planning for the next quarter.' },
+            'event-6': { title: 'Charity Drive', text: 'Giving back to the local community.' },
+            'event-7': { title: 'Factory Tour', text: 'VIP tour of our Halal certified facility.' },
+            'event-8': { title: 'Cooking Demo', text: 'Featuring recipes using JB Chicken Tocino.' },
+            'event-9': { title: 'Expo Dubai 2025', text: 'Expanding our reach in the UAE market.' },
+            'event-10': { title: 'Safety Training', text: 'Mandatory food safety training for all staff.' },
+            'event-11': { title: 'Marketing Workshop', text: 'Brainstorming new campaign strategies.' },
+            'event-12': { title: 'Customer Appreciation', text: 'A small thank you event for our loyal patrons.' },
+        };
+        // --- END NEW EVENT DATA STRUCTURE ---
+
 
         // GLOBAL VARIABLE TO STORE SCROLL POSITION
         let lastScrollPosition = 0;
@@ -292,11 +310,16 @@
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const searchInput = document.getElementById('search-input');
-            const searchInputMobile = document.getElementById('search-input-mobile');
+            
+            // NOTE: searchInputMobile was removed from the HTML, removing the JS reference as well
+            // const searchInputMobile = document.getElementById('search-input-mobile'); 
+            
             const searchButton = document.getElementById('search-button');
             
             const searchNextBtn = document.getElementById('search-next-btn');
-            const searchNextBtnMobile = document.getElementById('search-next-btn-mobile');
+            
+            // NOTE: searchNextBtnMobile was removed from the HTML, removing the JS reference as well
+            // const searchNextBtnMobile = document.getElementById('search-next-btn-mobile');
 
             const searchMessage = document.getElementById('search-message');
             
@@ -304,6 +327,9 @@
             const mainContentView = document.getElementById('main-content-view');
             const productDetailView = document.getElementById('product-detail-view');
             const detailContent = document.getElementById('detail-content');
+            
+            // --- SCROLL-TO-TOP LOGIC ELEMENTS ---
+            const scrollToTopButton = document.getElementById('scroll-to-top');
 
             let allMatches = [];
             let currentMatchIndex = -1;
@@ -367,19 +393,21 @@
                 detailContent.innerHTML = `
                     <div class="max-w-6xl mx-auto p-4 sm:p-8 bg-white rounded-xl shadow-2xl">
                         
-                        <!-- Top Go Back Button -->
-                        <button onclick="hideProductDetail()" class="text-sm font-semibold primary-text hover:text-gray-900 mb-8 flex items-center transition duration-150">
-                            <!-- Lucide Chevron Left Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left mr-1"><path d="m15 18-6-6 6-6"/></svg>
-                            Back to Product Catalog (Return to previous location)
-                        </button>
+                        <!-- Top Go Back Button (STANDARDIZED AND CENTERED) -->
+                        <div class="mb-8 flex justify-center">
+                            <button onclick="hideProductDetail()" class="inline-flex items-center primary-color text-white font-bold py-3 px-8 rounded-lg shadow-md primary-hover transition duration-300">
+                                <!-- Lucide Chevron Left Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left mr-2"><path d="m15 18-6-6 6-6"/></svg>
+                                Go Back to Product Catalog
+                            </button>
+                        </div>
                         
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
                             
                             <!-- Image/Placeholder Column (Left) -->
                             <div class="lg:col-span-1">
                                 <div class="w-full h-80 lg:h-96 bg-gray-200 rounded-xl mb-4 flex items-center justify-center border-4 border-gray-300 shadow-inner">
-                                    <span class="placeholder-text text-xl p-4">${product.imagePlaceholder}</span>
+                                    <span class="placeholder-text text-xl p-4 max-w-full break-words">${product.imagePlaceholder}</span>
                                 </div>
                                 <p class="text-xs text-gray-500 mt-2 text-center">Product ID: ${product.id} | Category: ${product.category}</p>
                             </div>
@@ -406,13 +434,13 @@
 
                                 <p class="text-gray-600 leading-relaxed mb-6 mt-8">${product.longDescription}</p>
                                 
-                                <!-- NEW BOTTOM GO BACK BUTTON -->
-                                <div class="mt-10 pt-6 border-t border-gray-200">
-                                    <button onclick="hideProductDetail()" class="w-full primary-color text-white font-bold py-3 px-8 rounded-lg shadow-md primary-hover transition duration-300">
+                                <!-- BOTTOM GO BACK BUTTON (STANDARDIZED AND CENTERED) -->
+                                <div class="mt-10 pt-6 border-t border-gray-200 flex justify-center">
+                                    <button onclick="hideProductDetail()" class="primary-color text-white font-bold py-3 px-8 rounded-lg shadow-md primary-hover transition duration-300">
                                         Go Back to Product Catalog
                                     </button>
                                 </div>
-                                <!-- END NEW BOTTOM GO BACK BUTTON -->
+                                <!-- END BOTTOM GO BACK BUTTON -->
                             </div>
                         </div>
                     </div>
@@ -431,7 +459,44 @@
                 window.scrollTo({ top: lastScrollPosition, behavior: 'smooth' });
             };
             
-            // --- END VIEW MANAGEMENT FUNCTIONS ---
+            // --- NEW MODAL FUNCTIONS FOR EVENTS ---
+            window.openEventModal = (eventId) => {
+                const event = eventData[eventId];
+                const modal = document.getElementById('event-modal');
+                const enlargedPhoto = document.getElementById('enlarged-photo-placeholder');
+                
+                if (!event) return;
+
+                // 1. Populate modal content with dynamic event text
+                enlargedPhoto.innerHTML = `
+                    <!-- Removed shadow-xl and set bg-white to blend with modal-content background -->
+                    <div class="relative w-full aspect-[4/3] max-w-full bg-white rounded-xl overflow-hidden">
+                        
+                        <!-- Clean Placeholder Area (Mimicking an image loading area) -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <!-- Center the placeholder text on the white background area -->
+                            <span class="placeholder-text text-xl p-4 max-w-full break-words">Image Placeholder for ${event.title}</span>
+                        </div>
+
+                        <!-- Text Overlay Area (Absolute positioning with dark background for contrast) -->
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 text-white text-left">
+                            <h3 class="text-3xl font-black mb-1">${event.title}</h3>
+                            <p class="text-base font-light">${event.text}</p>
+                        </div>
+                    </div>
+                `;
+                
+                // 2. Show modal and disable body scroll
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.closeEventModal = () => {
+                const modal = document.getElementById('event-modal');
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
+            };
+            // --- END NEW MODAL FUNCTIONS FOR EVENTS ---
             
             
             // --- Global State & Reset Management (ORIGINAL) ---
@@ -445,35 +510,29 @@
                 });
                 allMatches = [];
                 currentMatchIndex = -1;
+                
+                // Desktop Search Controls
                 searchNextBtn.classList.add('hidden');
-                searchNextBtnMobile.classList.add('hidden'); 
-                
                 searchNextBtn.disabled = false;
-                searchNextBtnMobile.disabled = false;
                 searchNextBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-500', 'hover:bg-gray-600');
-                searchNextBtnMobile.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-500', 'hover:bg-gray-600'); 
                 searchNextBtn.classList.add('primary-color', 'primary-hover'); 
-                searchNextBtnMobile.classList.add('primary-color', 'primary-hover');
-
                 searchNextBtn.textContent = 'Next';
-                searchNextBtnMobile.textContent = 'Next'; 
+
                 searchMessage.classList.add('hidden');
-                
                 isSearchFinished = false;
             };
 
             const fullReset = () => {
                 resetSearchUI();
                 searchInput.value = '';
-                searchInputMobile.value = '';
+                // Removed reference to searchInputMobile
                 displaySearchMessage("Search reset.", false);
             };
 
             const handleResetOnInteraction = (e) => {
                 if (!isSearchFinished) return;
 
-                if (e.target.closest('#search-input') || 
-                    e.target.closest('#search-input-mobile')) {
+                if (e.target.closest('#search-input') /* Removed reference to mobile input */) {
                     return;
                 }
 
@@ -489,12 +548,18 @@
             document.body.addEventListener('click', handleResetOnInteraction);
             window.addEventListener('scroll', handleScrollReset);
             
-            // ESC KEY LISTENER
+            // ESC KEY LISTENER (UPDATED TO HANDLE EVENT MODAL)
             document.addEventListener('keydown', (e) => {
-                // Check if the product detail view is visible and the key pressed is ESC
+                const eventModal = document.getElementById('event-modal');
+                // 1. Check for Product Detail View
                 if (e.key === 'Escape' && !productDetailView.classList.contains('hidden')) {
                     e.preventDefault();
                     window.hideProductDetail();
+                }
+                // 2. Check for Event Modal
+                if (e.key === 'Escape' && !eventModal.classList.contains('hidden')) {
+                    e.preventDefault();
+                    window.closeEventModal();
                 }
             });
             // --- End Global State & Reset Management (ORIGINAL) ---
@@ -646,7 +711,7 @@
                 
                 const isLastMatch = currentMatchIndex === allMatches.length - 1;
 
-                let buttons = [searchNextBtn, searchNextBtnMobile];
+                let buttons = [searchNextBtn];
 
                 buttons.forEach(btn => {
                     btn.classList.remove('primary-color', 'primary-hover', 'bg-gray-500', 'hover:bg-gray-600');
@@ -664,7 +729,6 @@
                 const endText = `Reset Search (Found last match)`;
 
                 searchNextBtn.textContent = isLastMatch ? endText : countText;
-                searchNextBtnMobile.textContent = isLastMatch ? endText : countText;
                 
                 if (isLastMatch) {
                     isSearchFinished = true; 
@@ -680,7 +744,8 @@
                 
                 resetSearchUI();
                 
-                const query = searchInput.value.trim() || searchInputMobile.value.trim();
+                // Use desktop input for search logic, mobile input is now missing.
+                const query = searchInput.value.trim();
 
                 if (query.length === 0) {
                     displaySearchMessage("Please enter a search query.", true);
@@ -694,7 +759,6 @@
 
                 if (allMatches.length > 0) {
                     searchNextBtn.classList.remove('hidden');
-                    searchNextBtnMobile.classList.remove('hidden'); 
                     
                     navigateToNextMatch(); 
                     
@@ -703,13 +767,10 @@
                     } else {
                          const endText = `Reset Search (Found last match)`;
                          searchNextBtn.textContent = endText;
-                         searchNextBtnMobile.textContent = endText;
                          displaySearchMessage(`1 result found. Next action resets search.`, false);
                          
                          searchNextBtn.classList.remove('primary-color', 'primary-hover');
-                         searchNextBtnMobile.classList.remove('primary-color', 'primary-hover');
                          searchNextBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
-                         searchNextBtnMobile.classList.add('bg-gray-500', 'hover:bg-gray-600');
 
                          isSearchFinished = true;
                     }
@@ -721,19 +782,17 @@
             };
             
             searchButton.addEventListener('click', handleSearch);
-            document.getElementById('search-button-mobile').addEventListener('click', handleSearch);
+            // Removed event listener for mobile search button
             searchNextBtn.addEventListener('click', navigateToNextMatch);
-            document.getElementById('search-next-btn-mobile').addEventListener('click', navigateToNextMatch);
+            // Removed event listener for mobile next button
 
             searchInput.addEventListener('input', resetSearchUI);
-            searchInputMobile.addEventListener('input', resetSearchUI);
+            // Removed event listener for mobile search input
             
             searchInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') { e.preventDefault(); handleSearch(); }
             });
-            searchInputMobile.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') { e.preventDefault(); handleSearch(); }
-            });
+            // Removed event listener for mobile search input keydown
             
             // --- Search Logic (End) ---
 
@@ -768,7 +827,10 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
+                        // No need to unobserve parallax elements, they are not part of scroll-based fade-in
+                        if (!entry.target.classList.contains('parallax-background')) {
+                            observer.unobserve(entry.target);
+                        }
                     }
                 });
             }, observerOptions);
@@ -784,13 +846,37 @@
                 parallaxElements.forEach(el => {
                     el.style.transform = `translateY(${scrollPosition * 0.2}px)`;
                 });
+                
+                // --- SCROLL-TO-TOP VISIBILITY CHECK ---
+                handleScrollToTopVisibility();
             });
+            
+            window.scrollToTop = () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            const handleScrollToTopVisibility = () => {
+                // Show button if scroll position is past the Hero section (e.g., > 400px)
+                if (window.scrollY > 400) {
+                    scrollToTopButton.classList.remove('opacity-0');
+                    scrollToTopButton.classList.add('opacity-100');
+                } else {
+                    scrollToTopButton.classList.remove('opacity-100');
+                    scrollToTopButton.classList.add('opacity-0');
+                }
+            };
+            
+            // Initial check for scroll-to-top button
+            if (scrollToTopButton) {
+                handleScrollToTopVisibility();
+            }
+
             // --- Scroll Animations & Parallax (End) ---
         });
     </script>
     
     <style>
-        /* Custom styles for the JIMBEC UAE food industry feel */
+        /* Custom styles for the JB UAE food industry feel */
         /* Primary: Deep Burgundy (Strength, Meat) - #800020 */
         /* Accent: Gold/Ochre (Luxury, Sand) - #B8860B */
         /* Secondary: Sand/Parchment (Background) - #F9F5F0 */
@@ -829,14 +915,13 @@
             will-change: opacity, transform;
         }
 
-        /* Slide in from LEFT */
-        .slide-in-left {
-            transform: translateX(-50px);
+        /* NEW: Slide in from BOTTOM */
+        .slide-in-bottom {
+            transform: translateY(50px); /* Start 50px below */
         }
-        /* Slide in from RIGHT */
-        .slide-in-right {
-            transform: translateX(50px);
-        }
+        
+        /* Note: Removed unused .slide-in-left and .slide-in-right classes */
+
 
         /* Visible state */
         .animate-on-scroll.is-visible {
@@ -869,6 +954,24 @@
         .cursor-not-allowed {
             cursor: not-allowed;
         }
+        
+        /* Custom styles for the event photo placeholders */
+        /* NOTE: The original event-placeholder-inner styles are removed/simplified to mimic product card consistency */
+        .event-placeholder-base {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .event-placeholder-base:hover {
+            transform: scale(1.05); /* Hover animation */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* UPDATED: Mobile Menu with increased subtle transparency (bg-white with 85% opacity) */
+        #mobile-menu {
+            background-color: rgba(255, 255, 255, 0.85); /* White with opacity 0.85 */
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800">
@@ -879,7 +982,7 @@
             <!-- Logo - Updated with HALAL CERTIFIED (حلال) -->
             <!-- Link uses navigateToSection to ensure proper view state management -->
             <a href="javascript:void(0)" onclick="navigateToSection('home')" class="text-2xl font-extrabold primary-text tracking-tight flex items-center">
-                JIMBEC <span class="text-gray-500 font-medium text-sm block -mt-1 ml-1 lg:ml-0 lg:inline">FOOD PRODUCTS CORP. | HALAL CERTIFIED (حلال)</span>
+                JB <span class="text-gray-500 font-medium text-sm block -mt-1 ml-1 lg:ml-0 lg:inline">FOOD PRODUCTS CORP. | HALAL CERTIFIED (حلال)</span>
             </a>
 
             <!-- Desktop Navigation and Search -->
@@ -894,11 +997,12 @@
                     </button>
                 </div>
                 
-                <!-- Desktop Navigation Links - UPDATED to use navigateToSection -->
+                <!-- Desktop Navigation Links - UPDATED to include Events -->
                 <nav class="hidden lg:flex space-x-8">
                     <a href="javascript:void(0)" onclick="navigateToSection('home')" class="text-gray-600 hover:primary-text transition duration-150 font-medium">HOME</a>
                     <a href="javascript:void(0)" onclick="navigateToSection('products')" class="text-gray-600 hover:primary-text transition duration-150 font-medium">PRODUCTS</a>
-                    <a href="javascript:void(0)" onclick="navigateToSection('about')" class="text-gray-600 hover:primary-text transition duration-150 font-medium">ABOUT JIMBEC</a>
+                    <a href="javascript:void(0)" onclick="navigateToSection('events')" class="text-gray-600 hover:primary-text transition duration-150 font-medium">JB EVENTS</a>
+                    <a href="javascript:void(0)" onclick="navigateToSection('about')" class="text-gray-600 hover:primary-text transition duration-150 font-medium">ABOUT JB</a>
                     <a href="javascript:void(0)" onclick="navigateToSection('stores')" class="text-gray-600 hover:primary-text transition duration-150 font-medium">STORES</a>
                     <a href="javascript:void(0)" onclick="navigateToSection('dealer')" class="text-gray-600 hover:primary-text transition duration-150 font-medium">BE A DEALER</a>
                 </nav>
@@ -915,22 +1019,14 @@
         <div id="search-message" class="hidden text-sm text-center p-2 rounded-b-lg border-b border-gray-200 w-full transition duration-300"></div>
 
         <!-- Mobile Menu Dropdown (Includes Mobile Search) -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white w-full shadow-lg border-t border-gray-100">
+        <div id="mobile-menu" class="hidden lg:hidden w-full shadow-lg border-t border-gray-100">
             <nav class="flex flex-col p-4 space-y-2">
-                <!-- Search Input Group (Mobile View) -->
-                <div class="flex items-center border border-gray-300 rounded-lg mb-2 focus-within:border-primary-text">
-                    <input type="text" id="search-input-mobile" placeholder="Search content..." class="p-2 w-full rounded-l-lg text-sm focus:outline-none">
-                    <button id="search-next-btn-mobile" class="text-white text-xs px-2 py-2 primary-color rounded-r-none hidden" title="Next Match">Next</button>
-                    <button id="search-button-mobile" class="text-gray-600 hover:primary-text p-2 rounded-r-lg transition duration-150" aria-label="Search">
-                        <!-- Lucide Search Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    </button>
-                </div>
                 
-                <!-- Mobile Navigation Links - UPDATED to use navigateToSection -->
+                <!-- Mobile Navigation Links - UPDATED to include Events -->
                 <a href="javascript:void(0)" onclick="navigateToSection('home')" class="py-2 px-4 text-gray-700 hover:primary-text rounded-lg font-medium">HOME</a>
                 <a href="javascript:void(0)" onclick="navigateToSection('products')" class="py-2 px-4 text-gray-700 hover:primary-text rounded-lg font-medium">PRODUCTS</a>
-                <a href="javascript:void(0)" onclick="navigateToSection('about')" class="py-2 px-4 text-gray-700 hover:primary-text rounded-lg font-medium">ABOUT JIMBEC</a>
+                <a href="javascript:void(0)" onclick="navigateToSection('events')" class="py-2 px-4 text-gray-700 hover:primary-text rounded-lg font-medium">JB EVENTS</a>
+                <a href="javascript:void(0)" onclick="navigateToSection('about')" class="py-2 px-4 text-gray-700 hover:primary-text rounded-lg font-medium">ABOUT JB</a>
                 <a href="javascript:void(0)" onclick="navigateToSection('stores')" class="py-2 px-4 text-gray-700 hover:primary-text rounded-lg font-medium">STORES</a>
                 <a href="javascript:void(0)" onclick="navigateToSection('dealer')" class="py-2 px-4 text-gray-700 hover:primary-text rounded-lg font-medium">BE A DEALER</a>
             </nav>
@@ -956,7 +1052,7 @@
                             Quality Meat Products Trusted by Filipino Families
                         </h1>
                         <p class="text-xl mb-8 font-light hidden sm:block">
-                            JIMBEC FOOD PRODUCTS CORP. has been serving the highest quality, delicious meat products for decades.
+                            JB FOOD PRODUCTS CORP. has been serving the highest quality, delicious meat products for decades.
                         </p>
                         <!-- UPDATED CLICK HANDLER -->
                         <button onclick="navigateToSection('products')" class="primary-color text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl primary-hover transition duration-300 transform hover:scale-105">
@@ -971,7 +1067,7 @@
             <section id="products" class="py-16 sm:py-24 bg-white">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 class="text-3xl sm:text-4xl font-extrabold section-heading mb-4">
-                        JIMBEC Top Products
+                        JB Top Products
                     </h2>
                     <p class="text-gray-600 mb-12 max-w-3xl mx-auto">
                         Discover the all-time favorites that bring extra flavor to every meal! These top picks are loved by families and foodies alike — perfect for everyday cooking, party platters, or quick bites.
@@ -980,53 +1076,53 @@
                     <!-- Product Grid (4 featured products) - Animated -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
-                        <!-- Product Card 1: Chicken Ham (Slide Left) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-left">
+                        <!-- Product Card 1: Chicken Ham (Slide Bottom) -->
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-base">PHOTO PLACEHOLDER</span>
+                                <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Cooked Ham</h3>
                             <p class="text-sm text-gray-500 mb-4">A savory-sweet classic, our fully cooked **chicken** ham is tender, flavorful, and ready to serve — perfect for any meal or sandwich.</p>
-                            <!-- UPDATED CLICK HANDLER -->
+                            <!-- Button already uses 'VIEW' -->
                             <button onclick="showProductDetail('prod-01')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
-                        <!-- Product Card 2: Chicken Tapa (Slide Right) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-right">
+                        <!-- Product Card 2: Chicken Tapa (Slide Bottom) -->
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-base">PHOTO PLACEHOLDER</span>
+                                <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tapa</h3>
                             <p class="text-sm text-gray-500 mb-4">Bold and satisfying, our **chicken** tapa delivers a balanced kick of salt and spice, great for silog meals or quick stir-fries.</p>
-                            <!-- UPDATED CLICK HANDLER -->
+                            <!-- Button already uses 'VIEW' -->
                             <button onclick="showProductDetail('prod-02')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
-                        <!-- Product Card 3: Chicken Tocino (Slide Left) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-left">
+                        <!-- Product Card 3: Chicken Tocino (Slide Bottom) -->
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-base">PHOTO PLACEHOLDER</span>
+                                <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tocino</h3>
                             <p class="text-sm text-gray-500 mb-4">Marinated in a signature sweet and savory glaze, our **Chicken** Tocino caramelizes beautifully in the pan for a traditional Filipino breakfast experience.</p>
-                            <!-- UPDATED CLICK HANDLER -->
+                            <!-- Button already uses 'VIEW' -->
                             <button onclick="showProductDetail('prod-03')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
-                        <!-- Product Card 4: Chicken Skinless Longganisa (Slide Right) -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-right">
+                        <!-- Product Card 4: Chicken Skinless Longganisa (Slide Bottom) -->
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 transition duration-300 hover:scale-[1.02] animate-on-scroll slide-in-bottom">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-base">PHOTO PLACEHOLDER</span>
+                                <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Skinless-Longganisa</h3>
                             <p class="text-sm text-gray-500 mb-4">Skip the guilt but keep the flavor! Savory-sweet, made with natural spices and no casing—just pure meaty goodness.</p>
-                            <!-- UPDATED CLICK HANDLER -->
+                            <!-- Button already uses 'VIEW' -->
                             <button onclick="showProductDetail('prod-04')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
                     </div>
 
-                    <div class="mt-12 animate-on-scroll">
+                    <div class="mt-12 animate-on-scroll slide-in-bottom">
                         <!-- UPDATED CLICK HANDLER -->
                         <button onclick="navigateToSection('product-listing')" class="secondary-color text-gray-700 font-semibold py-3 px-8 rounded-lg hover:bg-gray-200 transition duration-150 border border-gray-300">
                             BROWSE ALL PRODUCTS
@@ -1038,233 +1134,233 @@
             <!-- Full Product Listing Section (3x3 grid) -->
             <section id="product-listing" class="py-16 sm:py-24 secondary-color">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold primary-text section-heading mb-12 animate-on-scroll">
-                        JIMBEC Full Product Catalog
+                    <h2 class="text-3xl sm:text-4xl font-extrabold primary-text section-heading mb-12 animate-on-scroll slide-in-bottom">
+                        JB Full Product Catalog
                     </h2>
 
                     <!-- Product Grid (3 rows x 3 columns = 9 products per page visualization) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
                         
                         <!-- --- Page 1 (Products 1-9) - Animated --- -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-left" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 01: Chicken Cooked Ham</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 01: Chicken Cooked Ham</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Cooked Ham (Sliced)</h3>
                             <p class="text-sm text-gray-500 mb-4">A savory-sweet classic, fully cooked **chicken** ham and ready for any meal or sandwich.</p>
-                            <button onclick="showProductDetail('prod-01')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-01')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-right" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 02: Chicken Tapa</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 02: Chicken Tapa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tapa (Marinated)</h3>
                             <p class="text-sm text-gray-500 mb-4">Bold and satisfying **chicken** tapa, delivering a balanced kick of salt and spice.</p>
-                            <button onclick="showProductDetail('prod-02')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-02')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-left" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 03: Chicken Tocino</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 03: Chicken Tocino</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Tocino (Sweet Glaze)</h3>
                             <p class="text-sm text-gray-500 mb-4">Marinated **chicken** in a signature sweet and savory glaze for the classic breakfast.</p>
-                            <button onclick="showProductDetail('prod-03')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-03')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-right" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 04: Chicken Skinless Longganisa</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 04: Chicken Skinless Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Skinless Longganisa</h3>
                             <p class="text-sm text-gray-500 mb-4">Savory-sweet, made with natural spices and no casing—just pure meaty goodness.</p>
-                            <button onclick="showProductDetail('prod-04')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-04')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-left" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 05: Beef Corned Loaf</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 05: Beef Corned Loaf</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Corned Loaf</h3>
                             <p class="text-sm text-gray-500 mb-4">Classic shredded corned beef, savory and tender, ideal for breakfast or quick sandwiches.</p>
-                            <button onclick="showProductDetail('prod-05')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-05')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-right" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 06: Spicy Chicken Longganisa</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 06: Spicy Chicken Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Spicy Chicken Longganisa</h3>
                             <p class="text-sm text-gray-500 mb-4">A blend of chicken, herbs, and chili for a Filipino sausage with a kick.</p>
-                            <button onclick="showProductDetail('prod-06')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-06')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-left" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 07: Chicken Skinless Longganisa</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 07: Chicken Skinless Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Skinless Longganisa</h3>
                             <p class="text-sm text-gray-500 mb-4">Sweet and garlicky **chicken** sausage, prepared without the casing for easy cooking.</p>
-                            <button onclick="showProductDetail('prod-07')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-07')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-right" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 08: Chicken Vienna Sausage</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 08: Chicken Vienna Sausage</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Vienna Sausage</h3>
                             <p class="text-sm text-gray-500 mb-4">Small, savory **chicken** sausages, perfect for stews or a quick snack.</p>
-                            <button onclick="showProductDetail('prod-08')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-08')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-left" data-page="1">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card animate-on-scroll slide-in-bottom" data-page="1">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 09: Beef Hotdog (Jumbo)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 09: Beef Hotdog (Jumbo)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Hotdog (Jumbo)</h3>
                             <p class="text-sm text-gray-500 mb-4">All-beef hotdogs, extra plump and juicy, great for grilling or frying.</p>
-                            <button onclick="showProductDetail('prod-09')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-09')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
                         <!-- --- Page 2 (Products 10-18) - Animated --- -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 10: Chicken Ham Slices</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 10: Chicken Ham Slices</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Ham Slices</h3>
                             <p class="text-sm text-gray-500 mb-4">Delicate chicken ham slices, low in fat and perfect for sandwiches or appetizers.</p>
-                            <button onclick="showProductDetail('prod-10')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-10')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 11: Chicken Sisig Mix</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 11: Chicken Sisig Mix</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Sisig Mix (Frozen)</h3>
                             <p class="text-sm text-gray-500 mb-4">Pre-cooked and seasoned **chicken** sisig mix, ready to be heated and served sizzling hot.</p>
-                            <button onclick="showProductDetail('prod-11')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-11')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 12: Filipino Style Chicken Meatloaf</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 12: Filipino Style Chicken Meatloaf</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Filipino Style Chicken Meatloaf</h3>
                             <p class="text-sm text-gray-500 mb-4">A classic canned **chicken** meatloaf, finely ground and seasoned to traditional Filipino taste.</p>
-                            <button onclick="showProductDetail('prod-12')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-12')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 13: Chicken Cubes (Frozen)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 13: Chicken Cubes (Frozen)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Cubes (Frozen)</h3>
                             <p class="text-sm text-gray-500 mb-4">Diced premium **chicken** cuts, individually frozen for stews and curries.</p>
-                            <button onclick="showProductDetail('prod-13')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-13')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 14: Sweet Cured Chicken Bacon</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 14: Sweet Cured Chicken Bacon</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Sweet Cured Chicken Bacon</h3>
                             <p class="text-sm text-gray-500 mb-4">Thinly sliced **chicken** cured with a hint of sweetness, perfect for frying until crispy.</p>
-                            <button onclick="showProductDetail('prod-14')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-14')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 15: Garlic Chicken Longganisa</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 15: Garlic Chicken Longganisa</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Garlic Chicken Longganisa</h3>
                             <p class="text-sm text-gray-500 mb-4">Traditional Filipino sausage with a strong, savory garlic flavor, made with **chicken**.</p>
-                            <button onclick="showProductDetail('prod-15')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-15')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 16: Beef Patties</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 16: Beef Patties</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Patties (Frozen)</h3>
                             <p class="text-sm text-gray-500 mb-4">Pre-formed ground beef patties, ready for grilling or pan-frying.</p>
-                            <button onclick="showProductDetail('prod-16')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-16')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 17: Chicken Chorizo de Cebu Style</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 17: Chicken Chorizo de Cebu Style</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Chorizo de Cebu Style</h3>
                             <p class="text-sm text-gray-500 mb-4">Sweet and tangy Chorizo, a regional delicacy inspired by Cebuano taste, made with **chicken**.</p>
-                            <button onclick="showProductDetail('prod-17')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-17')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="2">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="2">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 18: Chicken Loaf (Canned)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 18: Chicken Loaf (Canned)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Loaf (Canned)</h3>
                             <p class="text-sm text-gray-500 mb-4">Versatile canned **chicken** product, perfect for quick meals and emergency stock.</p>
-                            <button onclick="showProductDetail('prod-18')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-18')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
 
                         <!-- --- Page 3 (Products 19-27) - Animated --- -->
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 19: Chicken Nuggets</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 19: Chicken Nuggets</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Nuggets (Frozen)</h3>
                             <p class="text-sm text-gray-500 mb-4">Classic bite-sized chicken pieces, breaded and ready to fry for kids and adults.</p>
-                            <button onclick="showProductDetail('prod-19')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-19')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 20: Meat Balls (Frozen)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 20: Meat Balls (Frozen)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Meat Balls (Frozen)</h3>
                             <p class="text-sm text-gray-500 mb-4">Ready-to-cook meat balls, seasoned perfectly for pasta or soup dishes.</p>
-                            <button onclick="showProductDetail('prod-20')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-20')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 21: Beef Tapa (Spicy)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 21: Beef Tapa (Spicy)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Beef Tapa (Spicy)</h3>
                             <p class="text-sm text-gray-500 mb-4">Tender marinated beef with an extra spicy kick for those who like heat.</p>
-                            <button onclick="showProductDetail('prod-21')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-21')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 22: Breakfast Sausage Links</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 22: Breakfast Sausage Links</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Breakfast Sausage Links</h3>
                             <p class="text-sm text-gray-500 mb-4">Small, flavorful sausage links, ideal for a traditional Western-style breakfast plate.</p>
-                            <button onclick="showProductDetail('prod-22')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-22')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 23: Shredded Chicken (Canned)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 23: Shredded Chicken (Canned)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Shredded Chicken (Canned)</h3>
                             <p class="text-sm text-gray-500 mb-4">Pre-cooked shredded chicken breast, ready to use in salads or sandwiches.</p>
-                            <button onclick="showProductDetail('prod-23')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-23')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 24: Jumbo Ham Slices</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 24: Jumbo Ham Slices</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Jumbo Ham Slices</h3>
                             <p class="text-sm text-gray-500 mb-4">Extra-large ham slices, great for special occasions or generous sandwich portions.</p>
-                            <button onclick="showProductDetail('prod-24')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-24')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 25: Chicken Hotdog (Regular)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 25: Chicken Hotdog (Regular)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Chicken Hotdog (Regular)</h3>
                             <p class="text-sm text-gray-500 mb-4">Classic chicken hotdogs, a reliable favorite for everyday meals.</p>
-                            <button onclick="showProductDetail('prod-25')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-25')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-right" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 26: Sweet Chicken Tocino (Frozen)</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 26: Sweet Chicken Tocino (Frozen)</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Sweet Chicken Tocino (Frozen)</h3>
                             <p class="text-sm text-gray-500 mb-4">Extra sweet marinated **chicken**, ready to thaw and fry for the perfect caramelized edge.</p>
-                            <button onclick="showProductDetail('prod-26')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-26')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-left" data-page="3">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-6 product-card hidden animate-on-scroll slide-in-bottom" data-page="3">
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                                <span class="placeholder-text text-sm">Product 27: Pepperoni Slices</span>
+                                <span class="placeholder-text text-sm max-w-full break-words">Product 27: Pepperoni Slices</span>
                             </div>
                             <h3 class="text-xl font-bold primary-text mb-2">Pepperoni Slices</h3>
                             <p class="text-sm text-gray-500 mb-4">Thinly sliced cured sausage with a smoky flavor, ideal for pizza toppings or snacks.</p>
-                            <button onclick="showProductDetail('prod-27')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW DETAILS</button>
+                            <button onclick="showProductDetail('prod-27')" class="text-xs font-semibold px-4 py-2 border border-[#800020] primary-text rounded-full hover:bg-[#F0EEEB] transition">VIEW</button>
                         </div>
                         <!-- END OF PAGE 3 -->
 
@@ -1272,14 +1368,14 @@
                         <!-- To add a new product (e.g., Product 28), copy the product card structure above and manually change: -->
                         <!-- 1. The data-page attribute to "4" (or the next sequential page number). -->
                         <!-- 2. The content (Product Name, Description, Placeholder Text). -->
-                        <!-- 3. Add the class `animate-on-scroll slide-in-left` (or `slide-in-right`) for animation. -->
+                        <!-- 3. Add the class `animate-on-scroll slide-in-bottom` for animation. -->
                         <!-- Repeat for every new product you want to add. -->
                         <!-- You would need to manually update the Pagination Placeholder structure below to add a 4 button. -->
                         
                     </div>
 
                     <!-- Pagination Placeholder (Simulation) -->
-                    <div class="mt-16 flex justify-center items-center space-x-4 animate-on-scroll" id="pagination-controls">
+                    <div class="mt-16 flex justify-center items-center space-x-4 animate-on-scroll slide-in-bottom" id="pagination-controls">
                         <button id="prev-btn" class="px-4 py-2 text-sm font-semibold rounded-lg transition duration-150">Previous</button>
                         <button data-page="1" class="page-btn px-4 py-2 text-sm font-bold rounded-lg transition duration-150">1</button>
                         <button data-page="2" class="page-btn px-4 py-2 text-sm font-semibold rounded-lg transition duration-150">2</button>
@@ -1294,11 +1390,11 @@
                 <!-- Parallax Background Element -->
                 <div class="parallax-background hero-background-base flex items-center justify-center bg-gray-500">
                     <div class="placeholder-text text-3xl p-4 border-2 border-dashed border-white w-4/5 h-4/5 flex items-center justify-center text-white">
-                        JIMBEC QUALITY ASSURANCE
+                        JB QUALITY ASSURANCE
                     </div>
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center p-4 z-10">
-                    <div class="text-center text-white max-w-xl bg-black bg-opacity-30 p-6 rounded-xl animate-on-scroll">
+                    <div class="text-center text-white max-w-xl bg-black bg-opacity-30 p-6 rounded-xl animate-on-scroll slide-in-bottom">
                         <h2 class="text-4xl font-black mb-2">Our Commitment to Halal (حلال)</h2>
                         <p>Unwavering dedication to international quality and purity standards in every product.</p>
                     </div>
@@ -1310,39 +1406,89 @@
             <section id="about" class="py-16 sm:py-24 bg-white">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <!-- Text Content (Slide Right) -->
-                        <div class="text-left animate-on-scroll slide-in-left">
+                        <!-- Text Content (Slide Bottom) -->
+                        <div class="animate-on-scroll slide-in-bottom">
                             <h2 class="text-3xl sm:text-4xl font-extrabold primary-text mb-4">
-                                About JIMBEC Food Products Corp.
+                                About JB Food Products Corp.
                             </h2>
                             <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                                For over three decades, **JIMBEC FOOD PRODUCTS CORP.** has established itself as a competitive force in the food manufacturing industry. Renowned for its commitment to excellence, the company upholds the highest standards in producing safe, high-quality meat products.
+                                For over three decades, **JB FOOD PRODUCTS CORP.** has established itself as a competitive force in the food manufacturing industry. Renowned for its commitment to excellence, the company upholds the highest standards in producing safe, high-quality meat products.
                             </p>
                             <p class="text-gray-600 mb-8 leading-relaxed">
-                                With a diverse portfolio of over 40 product varieties, JIMBEC continues to innovate and meet market demands while maintaining strict compliance with all food safety regulations. Trusted by consumers and partners alike, JIMBEC is a name synonymous with quality, consistency, and dedication in every Filipino home.
+                                With a diverse portfolio of over 40 product varieties, JB continues to innovate and meet market demands while maintaining strict compliance with all food safety regulations. Trusted by consumers and partners alike, JB is a name synonymous with quality, consistency, and dedication in every Filipino home.
                             </p>
-                            <a href="javascript:void(0)" onclick="navigateToSection('about')" class="primary-color text-white font-semibold py-2 px-6 rounded-lg primary-hover transition duration-150 shadow-md">
-                                READ MORE ABOUT US
-                            </a>
+                            <!-- Start Button Centering (Wrapped in flex container) -->
+                            <div class="flex justify-center">
+                                <a href="javascript:void(0)" onclick="navigateToSection('about')" class="primary-color text-white font-semibold py-2 px-6 rounded-lg primary-hover transition duration-150 shadow-md">
+                                    READ MORE ABOUT US
+                                </a>
+                            </div>
+                            <!-- End Button Centering -->
                         </div>
-                        <!-- Image Placeholder (Slide Left) -->
-                        <div class="w-full h-80 bg-gray-300 rounded-xl overflow-hidden flex items-center justify-center card-shadow animate-on-scroll slide-in-right">
-                            <span class="placeholder-text p-4">PHOTO PLACEHOLDER: JIMBEC Factory/Logo/Commitment Image</span>
+                        <!-- Image Placeholder (Slide Bottom) -->
+                        <div class="w-full h-80 bg-gray-300 rounded-xl overflow-hidden flex items-center justify-center card-shadow animate-on-scroll slide-in-bottom">
+                            <span class="placeholder-text p-4 max-w-full break-words">PHOTO PLACEHOLDER: JB Factory/Logo/Commitment Image</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Service Strengths Section - Animated -->
-            <section class="py-16 sm:py-24 secondary-color">
+            <!-- JB Events Section (NEW) -->
+            <section id="events" class="py-16 sm:py-24 secondary-color">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold section-heading mb-12 animate-on-scroll">
-                        JIMBEC Service Strengths
+                    <h2 class="text-3xl sm:text-4xl font-extrabold primary-text section-heading mb-12 animate-on-scroll slide-in-bottom">
+                        JB Events & Activities Gallery
+                    </h2>
+
+                    <!-- Event Photo Grid (3x4) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                        
+                        <!-- Dynamic Generation of 12 Placeholders -->
+                        <script>
+                            // This script runs inside the HTML content flow to generate the event cards
+                            const eventGrid = document.querySelector('#events .grid');
+                            if (eventGrid) {
+                                let html = '';
+                                const eventIds = Object.keys(eventData);
+
+                                for (let i = 0; i < 12; i++) {
+                                    const eventId = eventIds[i % eventIds.length]; // Cycle through the 12 defined events
+                                    const event = eventData[eventId];
+                                    
+                                    html += `
+                                        <div onclick="openEventModal('${eventId}')" 
+                                             class="cursor-pointer transition duration-300 transform hover:scale-[1.03] animate-on-scroll slide-in-bottom">
+                                            
+                                            <!-- The content below mimics the product card image placeholder -->
+                                            <div class="w-full aspect-square bg-gray-200 rounded-xl shadow-lg hover:shadow-xl event-placeholder-base">
+                                                <span class="placeholder-text text-sm p-4 leading-tight max-w-full break-words">
+                                                    ${i+1}. ${event.title.split(' ')[0]} Event
+                                                    <span class="block text-xs text-gray-500 mt-1">${event.title}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                                eventGrid.innerHTML = html;
+                            }
+                        </script>
+                        
+                    </div>
+                </div>
+            </section>
+            <!-- END JB Events Section -->
+
+
+            <!-- Service Strengths Section - Animated -->
+            <section class="py-16 sm:py-24 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold section-heading mb-12 animate-on-scroll slide-in-bottom">
+                        JB Service Strengths
                     </h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
-                        <!-- Strength Card 1: Delivery (Slide Left) -->
-                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-left">
+                        <!-- Strength Card 1: Delivery (Slide Bottom) -->
+                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-bottom">
                             <div class="p-3 inline-block primary-color rounded-full mb-4">
                                 <!-- Lucide Truck Icon (Inline SVG) -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck text-white"><path d="M5 18H3c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2"/><path d="M15 18h-2"/><path d="M19 18h-2"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/><path d="M17 14h-1c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1h1c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1z"/></svg>
@@ -1351,8 +1497,8 @@
                             <p class="text-gray-600 text-sm">Enjoy free delivery when you order large volumes of our premium meat products, ensuring convenience and savings.</p>
                         </div>
 
-                        <!-- Strength Card 2: Fast Transaction (Slide Right) -->
-                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-right">
+                        <!-- Strength Card 2: Fast Transaction (Slide Bottom) -->
+                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-bottom">
                             <div class="p-3 inline-block primary-color rounded-full mb-4">
                                 <!-- Lucide Timer Icon (Inline SVG) -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-timer text-white"><path d="M10 2h4"/><path d="M21 16a9 9 0 0 0-9-9 9.94 9.94 0 0 0-3.3 5.4 9 9 0 0 0 10.3 3.6"/><path d="M7.7 18.3 4 22"/><path d="M18.3 7.7 22 4"/><path d="M12 21v-4"/></svg>
@@ -1361,8 +1507,8 @@
                             <p class="text-gray-600 text-sm">We prioritize quick responses to all your inquiries and seamless transactions for a smooth customer experience.</p>
                         </div>
 
-                        <!-- Strength Card 3: Flexible Trade Terms (Slide Left) -->
-                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-left">
+                        <!-- Strength Card 3: Flexible Trade Terms (Slide Bottom) -->
+                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-bottom">
                             <div class="p-3 inline-block primary-color rounded-full mb-4">
                                 <!-- Lucide Handshake Icon (Inline SVG) -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4"/><path d="M21 12v9"/><path d="m21 21-1.4-1.6"/><path d="M8 13V8c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v2"/><path d="M22 12c0 2.76-1.76 5-4 5h-4"/></svg>
@@ -1371,8 +1517,8 @@
                             <p class="text-gray-600 text-sm">We offer flexible and accommodating payment terms for bulk and international trade orders, tailored to our partners' needs.</p>
                         </div>
 
-                        <!-- Strength Card 4: Exclusive Discounts (Slide Right) -->
-                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-right">
+                        <!-- Strength Card 4: Exclusive Discounts (Slide Bottom) -->
+                        <div class="p-6 rounded-xl border border-gray-100 secondary-color transition duration-300 hover:card-shadow animate-on-scroll slide-in-bottom">
                             <div class="p-3 inline-block primary-color rounded-full mb-4">
                                 <!-- Lucide Tag Icon (Inline SVG) -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.914 8.914a2 2 0 0 0 2.828 0l7.172-7.172a2 2 0 0 0 0-2.828l-8.914-8.914Z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
@@ -1387,18 +1533,18 @@
             <!-- News/Store Locations Section -->
             <section id="stores" class="py-16 bg-white">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold section-heading mb-4 animate-on-scroll">
-                        JIMBEC Company News & Locations
+                    <h2 class="text-3xl sm:text-4xl font-extrabold section-heading mb-4 animate-on-scroll slide-in-bottom">
+                        JB Company News & Locations
                     </h2>
-                    <div class="max-w-4xl mx-auto mt-12 bg-gray-200 p-8 rounded-xl shadow-lg border border-gray-100 animate-on-scroll">
+                    <div class="max-w-4xl mx-auto mt-12 bg-gray-200 p-8 rounded-xl shadow-lg border border-gray-100 animate-on-scroll slide-in-bottom">
                         <h3 class="text-2xl font-bold primary-text mb-3">
-                            JIMBEC Main Store Grand Opening
+                            JB Main Store Grand Opening
                         </h3>
                         <p class="text-gray-600 mb-6">
-                            June 2, 2025 marked a major milestone for JIMBEC Food Products Corp. as we officially opened the doors of our new and improved main store. This newly upgraded space is designed to serve you better — with wider selections, fresher meats, and improved customer experience. Thank you to everyone who joined us in this special milestone.
+                            June 2, 2025 marked a major milestone for JB Food Products Corp. as we officially opened the doors of our new and improved main store. This newly upgraded space is designed to serve you better — with wider selections, fresher meats, and improved customer experience. Thank you to everyone who joined us in this special milestone.
                         </p>
                         <div class="w-full h-48 bg-gray-300 rounded-lg mb-6 flex items-center justify-center">
-                            <span class="placeholder-text text-base">PHOTO PLACEHOLDER: Store Opening Event</span>
+                            <span class="placeholder-text text-base max-w-full break-words">PHOTO PLACEHOLDER: Store Opening Event</span>
                         </div>
                         <p class="text-gray-500 mb-6 text-sm">
                             Check out our other locations and store outlets by clicking the button below.
@@ -1415,11 +1561,11 @@
                 <!-- Parallax Background Element -->
                 <div class="parallax-background hero-background-base flex items-center justify-center bg-gray-700">
                     <div class="placeholder-text text-3xl p-4 border-2 border-dashed border-white w-4/5 h-4/5 flex items-center justify-center text-white">
-                        JIMBEC IN THE UAE
+                        JB IN THE UAE
                     </div>
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center p-4 z-10">
-                    <div class="text-center text-white max-w-xl bg-black bg-opacity-30 p-6 rounded-xl animate-on-scroll">
+                    <div class="text-center text-white max-w-xl bg-black bg-opacity-30 p-6 rounded-xl animate-on-scroll slide-in-bottom">
                         <h2 class="text-4xl font-black mb-2">Your Trusted Partner in the Middle East</h2>
                         <p>Bringing the authentic taste of Filipino quality to the UAE market.</p>
                     </div>
@@ -1428,12 +1574,12 @@
 
             <!-- Dealer Form Call to Action -->
             <section id="dealer" class="py-16 primary-color">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll slide-in-bottom">
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
                         BE A DEALER!
                     </h2>
                     <p class="text-white text-opacity-80 text-xl mb-8">
-                        Interested in becoming an official dealer of JIMBEC's trusted, high-quality products?
+                        Interested in becoming an official dealer of JB's trusted, high-quality products?
                     </p>
                     <a href="javascript:void(0)" onclick="navigateToSection('dealer')" class="bg-white primary-text font-bold py-3 px-10 rounded-full text-lg shadow-xl hover:bg-gray-100 transition duration-300 transform hover:scale-105">
                         DEALER FORM
@@ -1451,6 +1597,27 @@
         </div>
     </div>
     <!-- END product-detail-view -->
+    
+    <!-- Event Photo Modal (Hidden Overlay) -->
+    <!-- The p-2 on modal-content gives the white background border -->
+    <div id="event-modal" class="fixed inset-0 hidden z-[9999] backdrop-blur-sm bg-black/70 flex items-center justify-center p-4" onclick="if(event.target.id === 'event-modal') closeEventModal()">
+        <div id="modal-content" class="relative bg-white p-2 rounded-xl shadow-2xl w-11/12 max-w-4xl max-h-[90vh] overflow-hidden">
+            
+            <!-- Close Button -->
+            <button id="close-modal-btn" onclick="closeEventModal()" class="absolute top-4 right-4 bg-white text-gray-800 p-2 rounded-full shadow-lg hover:bg-red-500 hover:text-white transition z-10">
+                <!-- Lucide X Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+
+            <!-- Placeholder for Enlarged Image/Content -->
+            <!-- The inner div handles the rounded-edge boundary box -->
+            <div id="enlarged-photo-placeholder" class="w-full h-full rounded-lg">
+                <!-- Content injected here by openEventModal() function -->
+            </div>
+        </div>
+    </div>
+    <!-- END Event Photo Modal -->
+
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-12 pb-4">
@@ -1458,7 +1625,7 @@
             <!-- Company Info / Logo - Updated with HALAL CERTIFIED (حلال) -->
             <div>
                 <a href="javascript:void(0)" onclick="navigateToSection('home')" class="text-xl font-extrabold text-white tracking-tight">
-                    JIMBEC <span class="text-gray-400 font-medium text-xs block -mt-1">FOOD PRODUCTS CORP. | HALAL CERTIFIED (حلال)</span>
+                    JB <span class="text-gray-400 font-medium text-xs block -mt-1">FOOD PRODUCTS CORP. | HALAL CERTIFIED (حلال)</span>
                 </a>
                 <p class="text-gray-400 text-sm mt-4">
                     Serving Filipino families with quality and trusted meat products for over 30 years.
@@ -1467,10 +1634,11 @@
 
             <!-- Quick Links - UPDATED to use navigateToSection -->
             <div>
-                <h4 class="text-lg font-semibold mb-4 accent-text">JIMBEC Links</h4>
+                <h4 class="text-lg font-semibold mb-4 accent-text">JB Links</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="javascript:void(0)" onclick="navigateToSection('products')" class="text-gray-400 hover:accent-text transition">PRODUCTS</a></li>
-                    <li><a href="javascript:void(0)" onclick="navigateToSection('about')" class="text-gray-400 hover:accent-text transition">ABOUT JIMBEC</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateToSection('events')" class="text-gray-400 hover:accent-text transition">JB EVENTS</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateToSection('about')" class="text-gray-400 hover:accent-text transition">ABOUT JB</a></li>
                     <li><a href="javascript:void(0)" onclick="navigateToSection('stores')" class="text-gray-400 hover:accent-text transition">STORES</a></li>
                     <li><a href="javascript:void(0)" onclick="navigateToSection('dealer')" class="text-gray-400 hover:accent-text transition">BE A DEALER</a></li>
                 </ul>
@@ -1514,6 +1682,12 @@
             <p>&copy; Copyright 2025. All Rights Reserved. FDA License No. LTO-3000001646583 (Placeholder)</p>
         </div>
     </footer>
+
+    <!-- Scroll-to-Top Button -->
+    <button id="scroll-to-top" onclick="scrollToTop()" class="fixed bottom-20 right-4 primary-color text-white p-3 rounded-full shadow-xl opacity-0 transition-opacity duration-300 z-50 hover:bg-[#6A001A]" aria-label="Go to top">
+        <!-- Lucide Arrow Up Icon (Inline SVG) -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+    </button>
 
     <!-- Floating Chat Button (Kept for company interaction, not sales) -->
     <a href="#" class="fixed bottom-4 right-4 primary-color text-white p-4 rounded-full shadow-lg primary-hover transition duration-300" aria-label="Chat with us">
